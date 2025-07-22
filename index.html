@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarberShop - Классический мужской стиль</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: #d4af37;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        nav ul li a:hover {
+            color: #d4af37;
+        }
+        
+        .hero {
+            height: 500px;
+            background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #d4af37;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #d4af37;
+            color: #1a1a1a;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            background-color: #c9a227;
+        }
+        
+        .services, .masters, .booking {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: #1a1a1a;
+        }
+        
+        .services-grid, .masters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card, .master-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover, .master-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-card h3, .master-card h3 {
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .price {
+            font-weight: bold;
+            color: #d4af37;
+            font-size: 1.2rem;
+            margin-top: 15px;
+        }
+        
+        .page-content {
+            padding: 60px 0;
+        }
+        
+        .contact-info {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-info p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            color: #d4af37;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            width: 25px;
+            text-align: center;
+        }
+        
+        .master-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .master-specialty {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .book-master {
+            background-color: #1a1a1a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .book-master:hover {
+            background-color: #333;
+        }
+        
+        .booking-form {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: #d4af37;
+            color: #1a1a1a;
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+        
+        .submit-btn:hover {
+            background-color: #c9a227;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 30px;
+            text-align: center;
+            display: none;
+        }
+        
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 50px 0 30px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-section {
+            max-width: 250px;
+        }
+        
+        .footer-section h3 {
+            color: #d4af37;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin: 0 12px;
+            font-size: 1.4rem;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: #d4af37;
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #999;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .contact-info, .booking-form {
+                padding: 25px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <!-- Главная страница -->
+    <div id="home-page">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="https://i.ibb.co/7YfRc5V/barber-logo-new.png" alt="BarberShop Logo">
+                        <h1>BarberShop</h1>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li><a href="#home-page">Главная</a></li>
+                            <li><a href="#services-page">Услуги</a></li>
+                            <li><a href="#masters-page">Мастера</a></li>
+                            <li><a href="#booking-page">Запись</a></li>
+                            <li><a href="#contact-page">Контакты</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Классический мужской стиль</h2>
+                <p>Профессиональные стрижки и бритье в атмосфере настоящего барбершопа. Наши мастера помогут вам выглядеть безупречно в любой ситуации.</p>
+                <a href="#booking-page" class="btn">Записаться онлайн</a>
+            </div>
+        </section>
+
+        <section class="services">
+            <div class="container">
+                <h2 class="section-title">Наши услуги</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Мужская стрижка</h3>
+                        <p>Индивидуальный подход к каждой стрижке с учетом особенностей вашего типа лица и волос. Используем только профессиональные инструменты и средства.</p>
+                        <p class="price">1500 руб.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Бритье опасной бритвой</h3>
+                        <p>Классическое бритье с горячим полотенцем и уходом за кожей. Идеально для чувствительной кожи. Включает успокаивающий лосьон после бритья.</p>
+                        <p class="price">2000 руб.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Уход за бородой</h3>
+                        <p>Стрижка, укладка и уход за бородой с использованием профессиональных средств. Придадим вашей бороде ухоженный и стильный вид.</p>
+                        <p class="price">1200 руб.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>О BarberShop</h3>
+                        <p>Мы создаем классический мужской стиль с 2010 года. Наши барберы - настоящие профессионалы своего дела.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Контакты</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Барберов, 15</p>
+                        <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Часы работы</h3>
+                        <p>Пн-Пт: 10:00 - 20:00</p>
+                        <p>Сб-Вс: 10:00 - 18:00</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-vk"></i></a>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 BarberShop. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Страница "Услуги" -->
+    <div id="services-page" style="display: none;">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="https://i.ibb.co/7YfRc5V/barber-logo-new.png" alt="BarberShop Logo">
+                        <h1>BarberShop</h1>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li><a href="#home-page">Главная</a></li>
+                            <li><a href="#services-page">Услуги</a></li>
+                            <li><a href="#masters-page">Мастера</a></li>
+                            <li><a href="#booking-page">Запись</a></li>
+                            <li><a href="#contact-page">Контакты</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-content">
+            <div class="container">
+                <h2 class="section-title">Наши услуги</h2>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Мужская стрижка</h3>
+                        <p>Профессиональная стрижка с учетом особенностей вашего типа лица и волос. Включает мытье головы, стрижку, укладку и консультацию по уходу.</p>
+                        <p class="price">1500 руб.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3>Бритье опасной бритвой</h3>
+                        <p>Классическое бритье с горячим полотенцем, использованием профессиональной пены и уходом за кожей после бритья. Идеально для чувствительной кожи.</p>
+                        <p class="price">2000 руб.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3>Уход за бородой</h3>
+                        <p>Стрижка бороды по форме лица, укладка с использованием профессиональных средств, обработка кожи под бородой.</p>
+                        <p class="price">1200 руб.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3>Детская стрижка</h3>
+                        <p>Специальный подход к маленьким джентльменам. Быстро, аккуратно и без стресса. Для мальчиков до 12 лет.</p>
+                        <p class="price">1000 руб.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3>Королевское бритье</h3>
+                        <p>Премиум-сервис, включающий горячее полотенце, массаж лица, многоэтапное бритье и уход за кожей.</p>
+                        <p class="price">2500 руб.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3>Окрашивание бороды</h3>
+                        <p>Качественное окрашивание бороды с использованием гипоаллергенных красок. Поможет скрыть седину или придать бороде более ухоженный вид.</p>
+                        <p class="price">от 1500 руб.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>О BarberShop</h3>
+                        <p>Мы создаем классический мужской стиль с 2010 года. Наши барберы - настоящие профессионалы своего дела.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Контакты</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Барберов, 15</p>
+                        <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Часы работы</h3>
+                        <p>Пн-Пт: 10:00 - 20:00</p>
+                        <p>Сб-Вс: 10:00 - 18:00</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-vk"></i></a>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 BarberShop. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Страница "Мастера" -->
+    <div id="masters-page" style="display: none;">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="https://i.ibb.co/7YfRc5V/barber-logo-new.png" alt="BarberShop Logo">
+                        <h1>BarberShop</h1>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li><a href="#home-page">Главная</a></li>
+                            <li><a href="#services-page">Услуги</a></li>
+                            <li><a href="#masters-page">Мастера</a></li>
+                            <li><a href="#booking-page">Запись</a></li>
+                            <li><a href="#contact-page">Контакты</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="masters">
+            <div class="container">
+                <h2 class="section-title">Наши мастера</h2>
+                
+                <div class="masters-grid">
+                    <div class="master-card">
+                        <img src="https://images.unsplash.com/photo-1583864697784-a0efc8379f70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Алексей">
+                        <h3>Алексей</h3>
+                        <p class="master-specialty">Главный барбер</p>
+                        <p>Опыт работы: 10 лет. Специализируется на классических стрижках и бритье. Призер чемпионатов по барберингу.</p>
+                        <button class="book-master" data-master="Алексей">Записаться к мастеру</button>
+                    </div>
+                    
+                    <div class="master-card">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Дмитрий">
+                        <h3>Дмитрий</h3>
+                        <p class="master-specialty">Барбер-стилист</p>
+                        <p>Опыт работы: 7 лет. Эксперт по современным мужским стрижкам. Создаст индивидуальный стиль под ваш образ жизни.</p>
+                        <button class="book-master" data-master="Дмитрий">Записаться к мастеру</button>
+                    </div>
+                    
+                    <div class="master-card">
+                        <img src="https://images.unsplash.com/photo-1595475884562-073c30d45670?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Иван">
+                        <h3>Иван</h3>
+                        <p class="master-specialty">Барбер</p>
+                        <p>Опыт работы: 5 лет. Специалист по креативным стрижкам и укладкам. Поможет вам выделиться из толпы.</p>
+                        <button class="book-master" data-master="Иван">Записаться к мастеру</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>О BarberShop</h3>
+                        <p>Мы создаем классический мужской стиль с 2010 года. Наши барберы - настоящие профессионалы своего дела.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Контакты</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Барберов, 15</p>
+                        <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Часы работы</h3>
+                        <p>Пн-Пт: 10:00 - 20:00</p>
+                        <p>Сб-Вс: 10:00 - 18:00</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-vk"></i></a>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 BarberShop. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Страница "Запись" -->
+    <div id="booking-page" style="display: none;">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="https://i.ibb.co/7YfRc5V/barber-logo-new.png" alt="BarberShop Logo">
+                        <h1>BarberShop</h1>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li><a href="#home-page">Главная</a></li>
+                            <li><a href="#services-page">Услуги</a></li>
+                            <li><a href="#masters-page">Мастера</a></li>
+                            <li><a href="#booking-page">Запись</a></li>
+                            <li><a href="#contact-page">Контакты</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="booking">
+            <div class="container">
+                <h2 class="section-title">Онлайн запись</h2>
+                
+                <div class="booking-form">
+                    <form id="booking-form">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">Услуга</label>
+                            <select id="service" name="service" required>
+                                <option value="">Выберите услугу</option>
+                                <option value="Мужская стрижка">Мужская стрижка</option>
+                                <option value="Бритье опасной бритвой">Бритье опасной бритвой</option>
+                                <option value="Уход за бородой">Уход за бородой</option>
+                                <option value="Детская стрижка">Детская стрижка</option>
+                                <option value="Королевское бритье">Королевское бритье</option>
+                                <option value="Окрашивание бороды">Окрашивание бороды</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="master">Мастер</label>
+                            <select id="master" name="master">
+                                <option value="Любой">Любой доступный мастер</option>
+                                <option value="Алексей">Алексей</option>
+                                <option value="Дмитрий">Дмитрий</option>
+                                <option value="Иван">Иван</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="date">Дата и время</label>
+                            <input type="datetime-local" id="date" name="date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Дополнительные пожелания</label>
+                            <textarea id="message" name="message"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Записаться</button>
+                    </form>
+                    
+                    <div id="success-message" class="success-message">
+                        <h3>Спасибо за вашу заявку!</h3>
+                        <p>Мы свяжемся с вами в ближайшее время для подтверждения записи.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>О BarberShop</h3>
+                        <p>Мы создаем классический мужской стиль с 2010 года. Наши барберы - настоящие профессионалы своего дела.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Контакты</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Барберов, 15</p>
+                        <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Часы работы</h3>
+                        <p>Пн-Пт: 10:00 - 20:00</p>
+                        <p>Сб-Вс: 10:00 - 18:00</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-vk"></i></a>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 BarberShop. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Страница "Контакты" -->
+    <div id="contact-page" style="display: none;">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="https://i.ibb.co/7YfRc5V/barber-logo-new.png" alt="BarberShop Logo">
+                        <h1>BarberShop</h1>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li><a href="#home-page">Главная</a></li>
+                            <li><a href="#services-page">Услуги</a></li>
+                            <li><a href="#masters-page">Мастера</a></li>
+                            <li><a href="#booking-page">Запись</a></li>
+                            <li><a href="#contact-page">Контакты</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-content">
+            <div class="container">
+                <h2 class="section-title">Контакты</h2>
+                
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Адрес:</strong> г. Москва, ул. Барберов, 15</p>
+                    <p><i class="fas fa-phone"></i> <strong>Телефон:</strong> +7 (999) 123-45-67</p>
+                    <p><i class="fas fa-envelope"></i> <strong>Email:</strong> info@barbershop.ru</p>
+                    <p><i class="fas fa-clock"></i> <strong>Часы работы:</strong> Пн-Пт: 10:00 - 20:00, Сб-Вс: 10:00 - 18:00</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>О BarberShop</h3>
+                        <p>Мы создаем классический мужской стиль с 2010 года. Наши барберы - настоящие профессионалы своего дела.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Контакты</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Барберов, 15</p>
+                        <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Часы работы</h3>
+                        <p>Пн-Пт: 10:00 - 20:00</p>
+                        <p>Сб-Вс: 10:00 - 18:00</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-vk"></i></a>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 BarberShop. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Навигация между страницами
+        document.addEventListener('DOMContentLoaded', function() {
+            // Показываем главную страницу при загрузке
+            document.getElementById('home-page').style.display = 'block';
+            
+            // Обработка кликов по навигации
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetPage = this.getAttribute('href').substring(1);
+                    
+                    // Скрываем все страницы
+                    document.querySelectorAll('body > div').forEach(page => {
+                        page.style.display = 'none';
+                    });
+                    
+                    // Показываем целевую страницу
+                    document.getElementById(targetPage).style.display = 'block';
+                });
+            });
+            
+            // Обработка формы записи
+            const bookingForm = document.getElementById('booking-form');
+            if (bookingForm) {
+                bookingForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Здесь можно добавить отправку данных на сервер
+                    // В демо-версии просто показываем сообщение об успехе
+                    
+                    // Скрываем форму
+                    bookingForm.style.display = 'none';
+                    
+                    // Показываем сообщение об успехе
+                    document.getElementById('success-message').style.display = 'block';
+                    
+                    // Можно очистить форму
+                    bookingForm.reset();
+                });
+            }
+            
+            // Обработка кнопок "Записаться к мастеру"
+            const bookMasterButtons = document.querySelectorAll('.book-master');
+            bookMasterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const masterName = this.getAttribute('data-master');
+                    
+                    // Переходим на страницу записи
+                    document.querySelectorAll('body > div').forEach(page => {
+                        page.style.display = 'none';
+                    });
+                    document.getElementById('booking-page').style.display = 'block';
+                    
+                    // Устанавливаем выбранного мастера в форме
+                    document.getElementById('master').value = masterName;
+                    
+                    // Прокручиваем к форме
+                    document.getElementById('booking-form').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
